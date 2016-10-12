@@ -23,4 +23,5 @@ all:
 
 clean:
 	rm -f *.o
+	rm -rf makemp.dSYM
 
