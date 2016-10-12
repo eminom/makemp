@@ -4,17 +4,19 @@ Main_Src = \
 Cpp_Src = \
 	src/MpMuchacho.cc
 
-C_Src = \
-	libs/cJSON/cJSON.c \
-	libs/msgpack/src/objectc.c \
-	libs/msgpack/src/unpack.c \
-	libs/msgpack/src/version.c \
-	libs/msgpack/src/vrefbuffer.c \
-	libs/msgpack/src/zone.c
+Libs = deps
 
-Incl = -Ilibs/src \
-	-Ilibs/cJSON \
-	-Ilibs/msgpack/include
+C_Src = \
+	${Libs}/cJSON/cJSON.c \
+	${Libs}/msgpack/src/objectc.c \
+	${Libs}/msgpack/src/unpack.c \
+	${Libs}/msgpack/src/version.c \
+	${Libs}/msgpack/src/vrefbuffer.c \
+	${Libs}/msgpack/src/zone.c
+
+Incl = -I.\
+	-I${Libs}/cJSON \
+	-I${Libs}/msgpack/include
 
 all:
 	gcc -g -c ${C_Src} ${Incl}
