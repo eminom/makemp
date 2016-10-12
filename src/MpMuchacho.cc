@@ -9,7 +9,7 @@
 
 #include "MpMuchacho.h"
 #include "msgpack.h"
-#include "cJSON.h"
+#include "deps/cJSON/cJSON.h"
 
 inline void FREE_XPSTR(msgpack_object &t){
 	assert( MSGPACK_OBJECT_STR == t.type);
@@ -161,7 +161,7 @@ void destroyMsgPackObject(msgpack_object target) {
 
 
 
-char* _NewStr(msgpack_object_str str){
+static char* _NewStr(msgpack_object_str str){
 	int als = sizeof(char)*(str.size+1);
 	int cps = sizeof(char)*(str.size);
 	char *rv = (char*)malloc(als);
@@ -169,7 +169,7 @@ char* _NewStr(msgpack_object_str str){
 	memcpy(rv, str.ptr, cps);
 	return rv;
 }
-void _FreeStr(void *ptr){
+static void _FreeStr(void *ptr){
 	free(ptr);
 }
 

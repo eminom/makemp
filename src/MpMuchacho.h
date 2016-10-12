@@ -3,7 +3,7 @@
 #define _MP_MUCHACHO__DEF__
 
 #include "msgpack.h"
-#include "cJSON.h"
+#include "deps/cJSON/cJSON.h"
 
 msgpack_object getMsgPackObject(cJSON *root);
 void destroyMsgPackObject(msgpack_object target);
