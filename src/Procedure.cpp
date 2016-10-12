@@ -1,12 +1,14 @@
 
 
-#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include "MpMuchacho.h"
 
+#ifndef MAX_PATH
+#	define MAX_PATH	1024
+#endif
 
 //~ Need cJSON_Delete 
 cJSON* readFile(const char *path) {

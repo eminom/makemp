@@ -1,0 +1,6 @@
+[submodule "libs/cJSON"]
+	path = libs/cJSON
+	url = https://github.com/kbranigan/cJSON
+[submodule "libs/msgpack"]
+	path = libs/msgpack
+	url = https://github.com/msgpack/msgpack-c.git
