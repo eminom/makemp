@@ -88,6 +88,10 @@ int main(int argc, char **argv) {
 
 	if (!reverse) {
 		cJSON *org = readFile(inPath[0]);
+		if(!org){
+			fprintf(stderr, "Cannot open %s\n", inPath[0]);
+			exit(-1);
+		}
 		msgpack_object obj = getMsgPackObject(org);
 		cJSON_Delete(org);
 		msgpack_sbuffer sbuf;
