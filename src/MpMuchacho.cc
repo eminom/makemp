@@ -47,10 +47,13 @@ msgpack_object traverseArray(cJSON *arr) {
 		case cJSON_NULL:
 			thisOne.type = MSGPACK_OBJECT_NIL;
 			break;
-		case cJSON_False:
+		case cJSON_False:  // Special fix:
+			thisOne.type = MSGPACK_OBJECT_NIL;
+			break;
 		case cJSON_True:
 			thisOne.type = MSGPACK_OBJECT_BOOLEAN;
-			thisOne.via.boolean = (cJSON_False == uno->type ? false : true);
+			//thisOne.via.boolean = (cJSON_False == uno->type ? false : true);
+			thisOne.via.boolean = true;
 			break;
 		case cJSON_String:
 			INIT_XPSTR(thisOne, uno->valuestring);
@@ -107,10 +110,13 @@ msgpack_object traverseObject(cJSON *root) {
 		case cJSON_NULL:
 			thisOne.val.type = MSGPACK_OBJECT_NIL;
 			break;
-		case cJSON_False:
+		case cJSON_False:  //Special FIX:
+			thisOne.val.type = MSGPACK_OBJECT_NIL;
+			break;
 		case cJSON_True:
 			thisOne.val.type = MSGPACK_OBJECT_BOOLEAN;
-			thisOne.val.via.boolean = (cJSON_False == one->type ? false : true);
+			//thisOne.val.via.boolean = (cJSON_False == one->type ? false : true);
+			thisOne.val.via.boolean = true;
 			break;
 		case cJSON_Number:
 			thisOne.val.type = MSGPACK_OBJECT_FLOAT;
@@ -185,7 +191,8 @@ cJSON *buildFromMpObj(msgpack_object_map obj) {
 		cJSON *newEle = NULL;
 		switch (thisOne.type) {
 		case MSGPACK_OBJECT_NIL:
-			newEle = cJSON_CreateNull();
+			//newEle = cJSON_CreateNull();
+			newEle = cJSON_CreateBool(0); // SPECIAL FIX
 			break;
 		case MSGPACK_OBJECT_FLOAT:
 			newEle = cJSON_CreateNumber(thisOne.via.f64);
@@ -224,7 +231,8 @@ cJSON *buildFromMpArr(msgpack_object_array arr){
 		cJSON *newEle = NULL;
 		switch (thisOne.type) {
 		case MSGPACK_OBJECT_NIL:
-			newEle = cJSON_CreateNull();
+			//newEle = cJSON_CreateNull();
+			newEle = cJSON_CreateBool(0);  // SPECIAL FIX
 			break;
 		case MSGPACK_OBJECT_FLOAT:
 			newEle = cJSON_CreateNumber(thisOne.via.f64);
